@@ -201,6 +201,12 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " COC
 
+" resize split
+nnoremap <silent> <Leader>7 :exe "resize " . (winheight(0) * 10/9)<CR>
+nnoremap <silent> <Leader>8 :exe "resize " . (winheight(0) * 9/10)<CR>
+nnoremap <silent> <Leader>9 :exe "vertical resize " . (winwidth(0) * 10/9)<CR>
+nnoremap <silent> <Leader>0 :exe "vertical resize " . (winwidth(0) * 9/10)<CR>
+
 " Open new split for C+hjkl, if split doesnt exist
 map <silent> <C-h> :call WinMove('h')<CR>
 map <silent> <C-j> :call WinMove('j')<CR>
