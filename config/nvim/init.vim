@@ -116,6 +116,7 @@ nnoremap <Leader>l :set background=light<CR>
 nmap j gj
 nmap k gk
 
+
 map <C-n> :NERDTreeToggle<CR>
 nmap <C-m> :NERDTreeFind<CR>
 let g:NERDTreeMinimalUI = 1
@@ -149,6 +150,9 @@ nnoremap <Leader>o :GFiles .<CR>
 nnoremap <Leader>fc :Commits<CR>
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fa :Ag<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gp :Gpush<CR>
 
 nnoremap <Leader>c :let @/=""<CR>
 
@@ -224,6 +228,8 @@ function! WinMove(key)
       exec "wincmd ".a:key
     endif
   endfunction
+
+vmap r "_dP
 
 " enable yank/paste to/from system clipboard
 if has("clipboard")
