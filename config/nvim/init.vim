@@ -229,7 +229,8 @@ function! WinMove(key)
     endif
   endfunction
 
-vmap r "_dP
+vmap <Leader>r "_dP
+nmap <Leader>r <S-v>"_dP
 
 " enable yank/paste to/from system clipboard
 if has("clipboard")
