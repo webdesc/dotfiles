@@ -13,6 +13,47 @@
                 dest: ~/.config/nvim/init.vim
                 state: link
 
+        - file:
+                src: "{{ curdir }}/config/nvim/coc-settings.json"
+                dest: ~/.config/nvim/coc-settings.json
+                state: link
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/i3/config"
+                dest: ~/.i3/config
+                state: link
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/xorg/etc/X11/xorg.conf.d/00-keyboard.conf"
+                dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+                state: link
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/xorg/etc/X11/xorg.conf.d/30-touchpad.conf"
+                dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+                state: link
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/xorg/etc/X11/xorg.conf.d/70-synaptics.conf"
+                dest: /etc/X11/xorg.conf.d/70-synaptics.conf
+                state: link
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/.Xresources"
+                dest: ~/.Resources
+                state: link
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/alacritty/alacritty.yml"
+                dest: ~/.config/alacritty/alacritty.yml
+                state: link
+
         - pip: name=neovim state=latest
           become: yes
         
@@ -25,7 +66,7 @@
                 dest: ~/.local/share/nvim/site/autoload/plug.vim
                 url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-
+        # TODO Добавить билд flameshot (для скриншотов), найти аудио-плеер (возможно консольный)
         - pacman:
                 name: "{{ item }}"
                 state: latest
@@ -35,6 +76,12 @@
                 - the_silver_searcher
                 - zsh
                 - fzf
+                - alacritty
+                - tig
+                - ranger
+                - nodejs
+                - npm
+                - redshift
           tags:
                 - all
                 - arch

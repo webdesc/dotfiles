@@ -15,6 +15,7 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 set cursorline
+set encoding=UTF-8
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -31,6 +32,7 @@ set autowrite " automatically :write before running commands
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-sensible'
@@ -45,7 +47,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " apt-get inst
 Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'neoclide/vim-jsx-improve', { 'for': 'javascript' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -57,6 +59,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'elixir-editors/vim-elixir', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 Plug 'janko-m/vim-test'
+Plug 'sheerun/vim-polyglot'
 " Plug 'Valloric/YouCompleteMe' // install.py --clang-completer ERROR
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
@@ -78,9 +81,6 @@ let g:coc_global_extensions = [
       \ 'coc-docker',
       \ 'coc-diagnostic',
       \]
-" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-diagnostic', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
@@ -89,6 +89,8 @@ augroup FileTypeTetect
   filetype plugin indent on
   autocmd BufEnter Makefile setlocal ts=4 sw=4 noexpandtab
 augroup END
+
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 
 """ Plugins keymaps
 
@@ -119,6 +121,12 @@ nmap k gk
 
 map <C-n> :NERDTreeToggle<CR>
 nmap <C-m> :NERDTreeFind<CR>
+" let g:webdevicons_enable = 1
+" let g:webdevicons_enable_nerdtree = 1
+" let g:webdevicons_enable_airline_tabline = 1
+" let g:webdevicons_enable_airline_statusline = 1
+" let g:NERDTreeDirArrowExpandable = ''
+" let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 31
 let g:NERDTreeChDirMode = 2
@@ -143,6 +151,8 @@ let g:NERDTreeIndicatorMapCustom = {
 " nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 map <leader> <Plug>(easymotion-prefix)
+map <leader>s <Plug>(easymotion-bd-f)
+nmap <leader>s <Plug>(easymotion-overwin-f)
 
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
@@ -153,6 +163,7 @@ nnoremap <Leader>fa :Ag<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>df :Gdiffsplit<CR>
 
 nnoremap <Leader>c :let @/=""<CR>
 
@@ -229,6 +240,7 @@ function! WinMove(key)
     endif
   endfunction
 
+" нужно для многократной замены текста при выделении, без потери данных из буфера
 vmap <Leader>r "_dP
 nmap <Leader>r <S-v>"_dP
 

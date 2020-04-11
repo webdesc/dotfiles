@@ -1,0 +1,104 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+env:
+  # for starting tmux with correnct locale
+  LC_ALL: en_US.UTF-8
+  LANG: en_US.UTF-8
+  TERM: xterm-256color
+
+window:
+  startup_mode: Maximized
+  # decorations: none
+  padding:
+    x: 4
+    y: 4
+
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - -l
+#     - -c
+#     - "tmux"
+
+font:
+  normal:
+    family: "JetBrainsMono Nerd Font"
+  size: 11
+  glyph_offset:
+    y: 1
+
+# Colors (Gruvbox dark)
+colors:
+  # Default colors
+  primary:
+    background: "#111111"
+    foreground: "#ebdbb2"
+
+  # Normal colors
+  normal:
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
+
+  # Bright colors
+  bright:
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
+
+custom_cursor_colors: true
+hide_cursor_when_typing: true
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+mouse:
+  # Click settings
+  #
+  # The `double_click` and `triple_click` settings control the time
+  # alacritty should wait for accepting multiple clicks as one double
+  # or triple click.
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: true
+
+  url:
+    # URL launcher
+    #
+    # This program is executed when clicking on a text which is recognized as a URL.
+    # The URL is always added to the Control as the last parameter.
+    launcher: opera
+
+  # URL modifiers
+  #
+  # These are the modifiers that need to be held down for opening URLs when clicking
+  # on them. The available modifiers are documented in the key binding section.
+  modifiers: Control|Shift
+
+selection:
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+
+  # When set to `true`, selected text will be copied to both the primary and
+  # the selection clipboard. Otherwise, it will only be copied to the selection
+  # clipboard.
+  save_to_clipboard: true
+
+dynamic_title: true
+
+key_bindings:
+  - { key: Q, mods: Control|Shift, action: Quit }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
