@@ -38,6 +38,13 @@
 
         - file:
                 force: yes
+                src: "{{ curdir }}/config/i3/touchpad-toggle.sh"
+                dest: ~/.i3/touchpad-toggle.sh
+                state: link
+                mode: 0755
+
+        - file:
+                force: yes
                 src: "{{ curdir }}/config/xorg/etc/X11/xorg.conf.d/70-synaptics.conf"
                 dest: /etc/X11/xorg.conf.d/70-synaptics.conf
                 state: link
