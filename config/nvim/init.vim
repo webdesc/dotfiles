@@ -37,6 +37,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-commentary'
 " Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
@@ -197,6 +198,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> rr <Plug>(coc-rename)
+" nnoremap<leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 function! s:check_back_space() abort
   let col = col('.') - 1

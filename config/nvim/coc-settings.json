@@ -18,5 +18,6 @@
   "prettier.trailingComma": "all",
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "explorer.openAction.strategy": "previousWindow"
 }

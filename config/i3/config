@@ -356,7 +356,7 @@ bar {
         active_workspace   #595B5B #353836 #FDF6E3
         inactive_workspace #928374 #282828 #fbf1c7
         binding_mode       #d65d0e #282828 #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
+        urgent_workspace   #fbf1c7 #282828 #fbf1c7
     }
 }
 
@@ -365,7 +365,7 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #504945 #504945 #fbf1c7 #FDF6E3
+  client.focused          #504945 #928374 #1d2021 #FDF6E3
   client.focused_inactive #504945 #282828 #fbf1c7 #454948
   client.unfocused        #504945 #282828 #fbf1c7 #454948
   client.urgent           #504945 #282828 #fbf1c7 #268BD2
