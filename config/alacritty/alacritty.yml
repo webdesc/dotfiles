@@ -23,9 +23,12 @@ window:
 font:
   normal:
     family: "JetBrainsMono Nerd Font"
-  size: 11
+  size: 7
   glyph_offset:
     y: 1
+
+# Background settings
+background_opacity: 0.8
 
 # Colors (Gruvbox dark)
 colors:

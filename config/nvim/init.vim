@@ -5,7 +5,7 @@ setglobal incsearch
 setglobal tags=./tags;
 setglobal include=
 setglobal path=.,,
-
+ 
 syntax on
 set number
 set hidden
@@ -25,6 +25,15 @@ set noswapfile
 
 set showcmd   " display incomplete command
 set autowrite " automatically :write before running commands
+
+" keep searched chunks hightlighted
+set hlsearch
+set updatetime=50
+autocmd cursorhold * set nohlsearch
+noremap n :set hlsearch<cr>n
+noremap N :set hlsearch<cr>N
+noremap / :set hlsearch<cr>/
+noremap ? :set hlsearch<cr>?
 
 " Plugins
 
@@ -137,7 +146,7 @@ let g:NERDTreeCascadeOpenSingleChildDir = 1
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeMouseMode = 3
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
       \ "Modified"  : "●",
       \ "Staged"    : "✔",
       \ "Untracked" : "✭",

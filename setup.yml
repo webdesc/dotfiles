@@ -5,15 +5,36 @@
   tasks:
 
         - file:
+                force: yes
+                dest: ~/.i3
+                state: directory
+
+        - file:
+                force: yes
+                dest: ~/.config/alacritty
+                state: directory
+
+        - file:
+                force: yes
                 dest: ~/.config/nvim
                 state: directory
 
         - file:
+                force: yes
+                src: "{{ curdir }}/config/.bashrc"
+                dest: ~/.bashrc
+                state: link
+                mode: 0755
+
+        - file:
+                force: yes
                 src: "{{ curdir }}/config/nvim/init.vim"
                 dest: ~/.config/nvim/init.vim
                 state: link
+                mode: 0755
 
         - file:
+                force: yes
                 src: "{{ curdir }}/config/nvim/coc-settings.json"
                 dest: ~/.config/nvim/coc-settings.json
                 state: link
@@ -21,14 +42,66 @@
         - file:
                 force: yes
                 src: "{{ curdir }}/config/i3/config"
-                dest: ~/.i3/config
+                dest: ~/.config/i3/config
+                # dest: ~/.i3/config
                 state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/i3/autostart.sh"
+                dest: ~/.config/i3/autostart.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/config"
+                dest: ~/.config/polybar/config
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/launch.sh"
+                dest: ~/.config/polybar/launch.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/scripts/check-all-updates.sh"
+                dest: ~/.config/polybar/scripts/check-all-updates.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/scripts/launch-calendar.sh"
+                dest: ~/.config/polybar/scripts/launch-calendar.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/scripts/pavolume.sh"
+                dest: ~/.config/polybar/scripts/pavolume.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/scripts/spotify.sh"
+                dest: ~/.config/polybar/scripts/spotify.sh
+                state: link
+                mode: 0777
 
         - file:
                 force: yes
                 src: "{{ curdir }}/config/xorg/etc/X11/xorg.conf.d/00-keyboard.conf"
                 dest: /etc/X11/xorg.conf.d/00-keyboard.conf
                 state: link
+                mode: 0777
 
         - file:
                 force: yes
@@ -48,18 +121,21 @@
                 src: "{{ curdir }}/config/xorg/etc/X11/xorg.conf.d/70-synaptics.conf"
                 dest: /etc/X11/xorg.conf.d/70-synaptics.conf
                 state: link
+                mode: 0755
 
         - file:
                 force: yes
                 src: "{{ curdir }}/config/.Xresources"
                 dest: ~/.Resources
                 state: link
+                mode: 0755
 
         - file:
                 force: yes
                 src: "{{ curdir }}/config/alacritty/alacritty.yml"
                 dest: ~/.config/alacritty/alacritty.yml
                 state: link
+                mode: 0755
 
         - pip: name=neovim state=latest
           become: yes
@@ -74,22 +150,42 @@
                 url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
         # TODO Добавить билд flameshot (для скриншотов), найти аудио-плеер (возможно консольный)
-        # Добавить устрановку шрифта JetBrainsMono
+        # Добавить устрановку шрифта JetBrainsMono (nerd font):
+        # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
         - pacman:
                 name: "{{ item }}"
                 state: latest
           ignore_errors: true
           become: true
           with_items:
+                # common
+                - alacritty
+                - neovim
+                - python-pip
                 - the_silver_searcher
                 - zsh
                 - fzf
-                - alacritty
                 - tig
-                - ranger
                 - nodejs
                 - npm
+
+                # i3
+                - dmenu
+                - i3exit
+                - polybar
+
+                # soft
+                - ranger
                 - redshift
+                - flameshot
+                - opera
+                - spotify
+
+                # свистелки-перделки
+                - zoom
+                - telegram-desktop
+                - slack-desktop
+                - discord
           tags:
                 - all
                 - arch

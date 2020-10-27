@@ -34,7 +34,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Escape kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -44,6 +44,7 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ################################################################################################
 
 exec --no-startup-id volumeicon
+# exec --no-startup-id pulseaudio
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
@@ -278,6 +279,8 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
+exec --no-startup-id bash ~/.config/i3/autostart.sh
+
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 #exec --no-startup-id manjaro-hello
@@ -293,8 +296,10 @@ exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
-exec setxkbmap "us,ru" ",winkeys" "grp:shift_caps_toggle"
-exec --no-startup-id setxkbmap -option 'ctrl:swapcaps'
+# Startup setxkbmap moved to autostart.sh
+# exec_always --no-startup-id setxkbmap -option 'ctrl:swapcaps'
+# exec_always --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:shift_caps_toggle"
+# exec --no-startup-id xmodmap ~/.Xmodmap
 
 exec blueman-adapters
 
@@ -329,45 +334,22 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
+# exec_always --no-startup-id /home/webdesc/.config/polybar/launch.sh
+
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command i3bar
-	status_command i3status
-	# status_command i3blocks
-	position bottom
-	# binding_mode_indicator no
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
-
-    colors {
-        background #282828
-        statusline #fbf1c7
-        separator  #504945
-
-#                      border  backgr. text
-        focused_workspace  #fbf1c7 #928374 #282828
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #928374 #282828 #fbf1c7
-        binding_mode       #d65d0e #282828 #F9FAF9
-        urgent_workspace   #fbf1c7 #282828 #fbf1c7
-    }
-}
+# bar {
+#  position bottom
+# }
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #504945 #928374 #1d2021 #FDF6E3
+  client.focused          #4B5665 #4B5665 #ffffff #FDF6E3
   client.focused_inactive #504945 #282828 #fbf1c7 #454948
-  client.unfocused        #504945 #282828 #fbf1c7 #454948
+  client.unfocused        #4B5665 #282c34 #abb2bf #454948
   client.urgent           #504945 #282828 #fbf1c7 #268BD2
   client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
