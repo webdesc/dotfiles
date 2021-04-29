@@ -16,6 +16,7 @@ set softtabstop=2
 set shiftwidth=2
 set cursorline
 set encoding=UTF-8
+set autoread
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -66,10 +67,18 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
+Plug 'andymass/vim-matchup'
 Plug 'elixir-editors/vim-elixir', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
+" Clojure
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
+Plug 'tpope/vim-classpath', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
+Plug 'gfanto/fzf-lsp.nvim'
 " Plug 'Valloric/YouCompleteMe' // install.py --clang-completer ERROR
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
@@ -171,11 +180,11 @@ nnoremap <Leader>fc :Commits<CR>
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fa :Ag<CR>
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gc :Git commit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>df :Gdiffsplit<CR>
 
-nnoremap <Leader>c :let @/=""<CR>
+" nnoremap <Leader>c :let @/=""<CR>
 
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
@@ -253,8 +262,11 @@ function! WinMove(key)
   endfunction
 
 " нужно для многократной замены текста при выделении, без потери данных из буфера
-vmap <Leader>r "_dP
-nmap <Leader>r <S-v>"_dP
+vmap <Leader>c "_dP
+nmap <Leader>c <S-v>"_dP
+
+" reload files tree
+nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 
 " enable yank/paste to/from system clipboard
 if has("clipboard")

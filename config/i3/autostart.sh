@@ -4,5 +4,5 @@
 # done
 
 # xmodmap ~/.Xmodmap
-setxkbmap -option 'ctrl:swapcaps'
-setxkbmap "us,ru" ",winkeys" "grp:shift_caps_toggle"
+setxkbmap -option 'ctrl:nocaps'
+setxkbmap "us,ru" ",winkeys" "grp:win_space_toggle"

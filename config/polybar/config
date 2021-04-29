@@ -120,18 +120,17 @@ module-margin-right = 1
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
 font-0 = "UbuntuMono Nerd Font:size=11;2"
-; font-1 = "UbuntuMono Nerd Font:size=16;3"
-font-1 = "Font Awesome 5 Free:size=10;1"
+font-1 = "UbuntuMono Nerd Font:size=16;3"
 font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
-font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=9;1"
 font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 
 ; modules-left = i3 xwindow
-modules-left = i3 arrow2 xkeyboard arrow2 
-modules-center = arrow2 spotify pavolume arrow2
+modules-left = i3
 ; spotify-previous spotify-playpause spotify-next
 ; modules-right = arrow1 networkspeedup networkspeeddown arrow2 memory2 arrow3 cpu2 arrow2 pavolume arrow3 arch-aur-updates arrow2 date
-modules-right = arrow2 cpu1 arrow2 memory1 arrow2 battery arrow2 backlight-acpi arrow2 clock arrow2
+modules-right = arrow2 spotify arrow2 spotify-prev spotify-play-pause spotify-next arrow2 pavolume arrow2 cpu1 arrow2 memory1 arrow2 battery arrow2 backlight-acpi arrow2 clock arrow2 xkeyboard arrow2
 
 separator = 
 
@@ -289,7 +288,7 @@ label-visible-padding = 2
 ; urgent = Workspace with urgency hint set
 label-urgent = %icon% %name%
 label-urgent-background = ${self.label-focused-background}
-label-urgent-foreground = #db104e
+label-urgent-foreground = #FFBB00
 label-urgent-padding = 2
 
 format-foreground = ${colors.foreground}
@@ -654,7 +653,7 @@ format =%{A1:launch-calendar.sh:} 🕓 <label> %{A}
 
 [module/clock]
 type = custom/script
-exec = /usr/bin/date '+%Y-%m-%d | %H:%M'
+exec = /usr/bin/date '+%Y-%m-%d | %H:%M | %a'
 interval = 2
 format-prefix = " "
 format-prefix-foreground = #abb2bf
@@ -1084,72 +1083,49 @@ format-background = ${colors.background}
 
 ################################################################################
 
-[module/spotify]
-;https://github.com/NicholasFeldman/dotfiles/blob/master/polybar/.config/polybar/spotify.sh
-type = custom/script
-exec = ~/.config/polybar/scripts/spotify.sh
-interval = 1
-
-;format = <label>
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-padding = 0
-format-underline = #0f0
-format-prefix = "  "
-format-prefix-foreground = #0f0
-label = %output:0:150%
-
-; [module/spotify]
-; type = custom/ipc
-; ; Default
-; hook-0 = echo ""
-; ; Playing/paused show song name and artist
-; hook-1 = spotifyctl -q status --format '%artist%: %title%'
-; initial = 2
-
-
-; format-online =  "<label-song>   <icon-prev>  <icon-stop>  <toggle>  <icon-next>"
 ; icon-prev = 
 ; icon-stop = 
 ; icon-play = 
 ; icon-pause = 
 ; icon-next = 
-
-[module/spotify-previous]
+[module/spotify]
 type = custom/script
-exec = echo "玲"
+tail = true
+interval = 0
+; bat-spotify-font = 5
+format-prefix = "  "
 format = <label>
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-underline = #0f0
+format-prefix-foreground = #0f0
+exec = /home/webdesc/.config/polybar/scripts/scroll_spotify_status.sh
+
+[module/spotify-prev]
+type = custom/script
+exec = echo "  "
+format = <label>
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+; format-spotify-prev-font = 5
 click-left = playerctl previous spotify
 
-; type = custom/ipc
-; ; format-font = 2
-; ; Default
-; hook-0 = echo ""
-; ; When spotify active
-; hook-1 = echo "Previous"
-; click-left = "spotifyctl -q previous"
-
+[module/spotify-play-pause]
+type = custom/ipc
+hook-0 = echo ""
+hook-1 = echo ""
+initial = 1
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+click-left = playerctl play-pause spotify
 
 [module/spotify-next]
-type = custom/ipc
-format-font = 2
-; Default
-hook-0 = echo ""
-; When spotify active
-hook-1 = echo "Next"
-click-left = "spotifyctl -q next"
-
-
-[module/spotify-playpause]
-type = custom/ipc
-format-font = 2
-; Default
-hook-0 = echo ""
-; Playing
-hook-1 = echo "Pause"
-; Paused
-hook-2 = echo "Play"
-click-left = "spotifyctl -q playpause"
+type = custom/script
+exec = echo "  "
+format = <label>
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+click-left = playerctl next spotify
 
 ################################################################################
 

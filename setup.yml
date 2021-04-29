@@ -49,6 +49,13 @@
 
         - file:
                 force: yes
+                src: "{{ curdir }}/config/i3/i3-new-workspace.sh"
+                dest: ~/.config/i3/i3-new-workspace.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
                 src: "{{ curdir }}/config/i3/autostart.sh"
                 dest: ~/.config/i3/autostart.sh
                 state: link
@@ -93,6 +100,20 @@
                 force: yes
                 src: "{{ curdir }}/config/polybar/scripts/spotify.sh"
                 dest: ~/.config/polybar/scripts/spotify.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/scripts/scroll_spotify_status.sh"
+                dest: ~/.config/polybar/scripts/scroll_spotify_status.sh
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/polybar/scripts/get_spotify_status.sh"
+                dest: ~/.config/polybar/scripts/get_spotify_status.sh
                 state: link
                 mode: 0777
 
