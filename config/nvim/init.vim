@@ -181,7 +181,7 @@ nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fa :Ag<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Git commit<CR>
-nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>df :Gdiffsplit<CR>
 
 " nnoremap <Leader>c :let @/=""<CR>
