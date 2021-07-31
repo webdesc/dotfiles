@@ -266,7 +266,8 @@ vmap <Leader>c "_dP
 nmap <Leader>c <S-v>"_dP
 
 " reload files tree
-nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
+nmap <Leader>ue :NERDTreeFocus<cr>R<c-w><c-p>cr
+nmap <Leader>uf :edit<cr>R<c-w><c-p>
 
 " enable yank/paste to/from system clipboard
 if has("clipboard")
