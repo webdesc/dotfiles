@@ -56,6 +56,13 @@
 
         - file:
                 force: yes
+                src: "{{ curdir }}/config/i3/libinput-gestures.conf"
+                dest: ~/.config/libinput-gestures.conf
+                state: link
+                mode: 0777
+
+        - file:
+                force: yes
                 src: "{{ curdir }}/config/i3/autostart.sh"
                 dest: ~/.config/i3/autostart.sh
                 state: link
