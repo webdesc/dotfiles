@@ -178,8 +178,9 @@
                 url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
         # TODO Добавить билд flameshot (для скриншотов), найти аудио-плеер (возможно консольный)
-        # Добавить устрановку шрифта JetBrainsMono (nerd font):
+        # TODO Добавить устрановку шрифта JetBrainsMono (nerd font):
         # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+        # TODO Добавить устрановку libinput-gestures из aur
         - pacman:
                 name: "{{ item }}"
                 state: latest
