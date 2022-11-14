@@ -1,0 +1,3 @@
+! map Ctrl to Caps
+clear      lock 
+keycode      66 = Control_L

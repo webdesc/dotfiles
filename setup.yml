@@ -11,6 +11,11 @@
 
         - file:
                 force: yes
+                dest: ~/.config/polybar/scripts
+                state: directory
+
+        - file:
+                force: yes
                 dest: ~/.config/alacritty
                 state: directory
 
@@ -21,8 +26,22 @@
 
         - file:
                 force: yes
+                src: "{{ curdir }}/config/.Xmodmap"
+                dest: ~/.Xmodmap
+                state: link
+                mode: 0755
+
+        - file:
+                force: yes
                 src: "{{ curdir }}/config/.bashrc"
                 dest: ~/.bashrc
+                state: link
+                mode: 0755
+
+        - file:
+                force: yes
+                src: "{{ curdir }}/config/redshift.conf"
+                dest: ~/.config/redshift.conf
                 state: link
                 mode: 0755
 
