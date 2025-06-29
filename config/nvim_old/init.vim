@@ -81,6 +81,9 @@ Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
 Plug 'gfanto/fzf-lsp.nvim'
 " Plug 'Valloric/YouCompleteMe' // install.py --clang-completer ERROR
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+" or                                , { 'branch': '0.1.x' }
 let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-html',
@@ -90,6 +93,7 @@ let g:coc_global_extensions = [
       \ 'coc-stylelint',
       \ 'coc-vimlsp',
       \ 'coc-elixir',
+      \ 'coc-angular',
       \ 'coc-json',
       \ 'coc-eslint',
       \ 'coc-jest',
@@ -137,9 +141,10 @@ nnoremap <Leader>l :set background=light<CR>
 nmap j gj
 nmap k gk
 
-
+" :nmap <C-n> <Cmd>CocCommand explorer<CR>
 map <C-n> :NERDTreeToggle<CR>
 nmap <C-m> :NERDTreeFind<CR>
+
 " let g:webdevicons_enable = 1
 " let g:webdevicons_enable_nerdtree = 1
 " let g:webdevicons_enable_airline_tabline = 1
@@ -147,7 +152,7 @@ nmap <C-m> :NERDTreeFind<CR>
 " let g:NERDTreeDirArrowExpandable = ''
 " let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize = 31
+let g:NERDTreeWinSize = 32
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeShowBookmarks = 1
@@ -177,12 +182,18 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <Leader>fc :Commits<CR>
-nnoremap <Leader>ff :Files<CR>
+" nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fa :Ag<CR>
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gc :Git commit<CR>
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>df :Gdiffsplit<CR>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " nnoremap <Leader>c :let @/=""<CR>
 
@@ -226,14 +237,28 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Allow tab to traverse options in auto-complete window, refresh on backspace    
+inoremap <silent><expr> <TAB>    
+      \ pumvisible() ? "\<C-n>" :    
+      \ <SID>check_back_space() ? "\<TAB>" :           
+      \ coc#refresh()               
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"      
+    
+" Check if backspace was just pressed      
+function! s:check_back_space() abort                    
+  let col = col('.') - 1    
+  return !col || getline('.')[col - 1]  =~# '\s'    
+endfunction  
 
 " COC
 
@@ -276,3 +301,4 @@ if has("clipboard")
     set clipboard+=unnamedplus
   endif
 endif
+

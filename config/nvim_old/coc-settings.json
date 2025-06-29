@@ -19,5 +19,8 @@
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
   "prettier.singleQuote": true,
-  "explorer.openAction.strategy": "previousWindow"
+  "explorer.position": "floating",
+  "snippets.ultisnips.pythonPrompt": false,
+  "javascript.suggest.autoImports": true, 
+  "typescript.suggest.autoImports": true
 }

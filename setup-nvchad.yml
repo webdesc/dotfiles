@@ -1,0 +1,30 @@
+---
+
+- hosts: all
+
+  tasks:
+
+    - name: create dir for nvchad neovim config
+      ansible.builtin.file:
+        force: yes
+        dest: ~/.config/nvim
+        state: directory
+
+    - name: link config files
+      ansible.builtin.file:
+        force: yes
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+        mode: 0755
+      loop:
+        - { src: '{{ curdir }}/config/nvim/init.lua', dest: ~/.config/nvim/init.lua }
+        - { src: '{{ curdir }}/config/nvim/lazy-lock.json', dest: ~/.config/nvim/lazy-lock.json }
+        - { src: '{{ curdir }}/config/nvim/lua/mappings.lua', dest: ~/.config/nvim/lua/mappings.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/options.lua', dest: ~/.config/nvim/lua/options.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/chadrc.lua', dest: ~/.config/nvim/lua/chadrc.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/angularls.lua', dest: ~/.config/nvim/lua/angularls.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/configs/lazy.lua', dest: ~/.config/nvim/lua/configs/lazy.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/configs/conform.lua', dest: ~/.config/nvim/lua/configs/conform.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/configs/lspconfig.lua', dest: ~/.config/nvim/lua/configs/lspconfig.lua }
+        - { src: '{{ curdir }}/config/nvim/lua/plugins/init.lua', dest: ~/.config/nvim/lua/plugins/init.lua }
